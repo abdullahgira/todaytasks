@@ -4,11 +4,13 @@ import styled from "styled-components"
 const StyledNav = styled.nav`
     display: flex;
     justify-content: center;
-    a {
+    margin-bottom: 3rem;
+
+    button {
         letter-spacing: 2px;
     }
 
-    a + a {
+    button + button {
         margin-left: 8rem;
     }
 `

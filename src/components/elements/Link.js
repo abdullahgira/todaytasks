@@ -1,12 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 
-const StyledLink = styled.a`
+const StyledLink = styled.button`
     text-decoration: none;
     color: #ba9973;
     font-size: 14px;
     text-transform: uppercase;
     cursor: pointer;
+    border: 0;
+    background-color: inherit;
 
     &:hover {
         text-decoration: underline;

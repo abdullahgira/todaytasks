@@ -155,13 +155,5 @@ const StyledTask = styled.div`
 `
 
 export default function Task(props) {
-    return (
-        <StyledTask>
-            <label class="checkbox-label">
-                <input type="checkbox" />
-                <span class="checkbox-custom circular"></span>
-            </label>
-            {props.children}
-        </StyledTask>
-    )
+    return <StyledTask {...props} />
 }

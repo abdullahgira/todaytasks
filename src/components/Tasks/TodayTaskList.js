@@ -10,6 +10,8 @@ export default function TodayTaskList({
     tasks,
     onViewChange,
     triggerComplete,
+    onDelete,
+    onEdit,
 }) {
     const todayTasks =
         tasks.filter((t) => moment(t.date).isSame(moment(), "day")) || []
@@ -25,6 +27,8 @@ export default function TodayTaskList({
                     key={task.id}
                     task={task}
                     triggerComplete={triggerComplete}
+                    onDelete={onDelete}
+                    onEdit={onEdit}
                 />
             ))}
         </React.Fragment>

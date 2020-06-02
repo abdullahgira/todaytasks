@@ -10,6 +10,7 @@ export default function CompleteTaskList({
     tasks,
     onViewChange,
     addToTodayTasks,
+    onDelete,
 }) {
     const prevCompleteTasks =
         tasks.filter(
@@ -30,6 +31,7 @@ export default function CompleteTaskList({
                     key={task.id}
                     task={task}
                     addToTodayTasks={addToTodayTasks}
+                    onDelete={onDelete}
                 />
             ))}
         </React.Fragment>

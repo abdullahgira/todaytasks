@@ -49,7 +49,7 @@ export default function AddTask(props) {
         e.preventDefault()
         if (e.keyCode === ENTER_KEY) {
             if (taskName.trim() !== "") {
-                props.AddNewTask(taskName)
+                props.addNewTask(taskName)
                 setTaskName("")
             }
         } else if (e.keyCode === ESC_KEY) {
@@ -65,14 +65,7 @@ export default function AddTask(props) {
         <>
             <SyteldInput
                 type="text"
-                placeholder={
-                    [
-                        "Do Shopping",
-                        "Wash the car",
-                        "Fed the pet",
-                        "Water the garden",
-                    ][Math.floor(Math.random() * 4)]
-                }
+                placeholder="Add something todo..."
                 onKeyUp={handleKeyPress}
                 onChange={(e) => {
                     setTaskName(e.target.value)

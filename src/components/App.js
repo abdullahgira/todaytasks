@@ -39,7 +39,7 @@ function App() {
         ])
     }
 
-    function AddNewTask(taskName) {
+    function addNewTask(taskName) {
         let newTask = {
             id: uuidv4(),
             name: taskName,
@@ -48,6 +48,25 @@ function App() {
         }
 
         setTasks([...tasks, newTask])
+    }
+
+    function deleteTask(taskId) {
+        let taskIdx = tasks.findIndex((t) => t.id === taskId)
+        setTasks([...tasks.slice(0, taskIdx), ...tasks.slice(taskIdx + 1)])
+    }
+
+    function editTask(task) {
+        let taskIdx = tasks.findIndex((t) => t.id === task.id)
+        let oldTask = tasks[taskIdx]
+        let newTask = {
+            ...oldTask,
+            name: task.name,
+        }
+        setTasks([
+            ...tasks.slice(0, taskIdx),
+            newTask,
+            ...tasks.slice(taskIdx + 1),
+        ])
     }
 
     useEffect(() => {
@@ -62,8 +81,10 @@ function App() {
                         tasks={tasks}
                         onViewChange={setView}
                         triggerComplete={triggerComplete}
+                        onDelete={deleteTask}
+                        onEdit={editTask}
                     />
-                    <AddTask AddNewTask={AddNewTask} />
+                    <AddTask addNewTask={addNewTask} />
                 </>
             )}
             {view === "previous" && (
@@ -71,6 +92,8 @@ function App() {
                     onViewChange={setView}
                     tasks={tasks}
                     addToTodayTasks={addToTodayTasks}
+                    onDelete={deleteTask}
+                    onEdit={editTask}
                 />
             )}
             {view === "complete" && (
@@ -78,6 +101,8 @@ function App() {
                     onViewChange={setView}
                     tasks={tasks}
                     addToTodayTasks={addToTodayTasks}
+                    onDelete={deleteTask}
+                    onEdit={editTask}
                 />
             )}
         </Container>

@@ -6,7 +6,12 @@ import PrevTask from "./PrevTask"
 
 import moment from "moment"
 
-export default function PrevTaskList({ tasks, onViewChange, addToTodayTasks }) {
+export default function PrevTaskList({
+    tasks,
+    onViewChange,
+    addToTodayTasks,
+    onDelete,
+}) {
     const prevTasks =
         tasks.filter(
             (t) =>
@@ -26,6 +31,7 @@ export default function PrevTaskList({ tasks, onViewChange, addToTodayTasks }) {
                     key={task.id}
                     task={task}
                     addToTodayTasks={addToTodayTasks}
+                    onDelete={onDelete}
                 />
             ))}
         </React.Fragment>

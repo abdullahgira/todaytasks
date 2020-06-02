@@ -1,9 +1,9 @@
 import React from "react"
 import Task from "./Task"
 
-export default function PrevTask({ task, addToTodayTasks }) {
+export default function PrevTask({ task, addToTodayTasks, ...props }) {
     return (
-        <Task>
+        <Task {...props}>
             <label className="checkbox-label">
                 <input
                     type="checkbox"

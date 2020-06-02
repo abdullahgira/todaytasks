@@ -9,9 +9,9 @@ const StyledPlusSymbol = styled.span`
     cursor: pointer;
 `
 
-export default function PrevTask({ task, addToTodayTasks }) {
+export default function PrevTask({ task, addToTodayTasks, ...props }) {
     return (
-        <Task>
+        <Task {...props}>
             <StyledPlusSymbol onClick={() => addToTodayTasks(task)}>
                 +
             </StyledPlusSymbol>

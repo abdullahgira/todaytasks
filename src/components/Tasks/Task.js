@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
+import Input from "../elements/Input"
 
 const StyledTask = styled.div`
     display: flex;
@@ -158,8 +159,8 @@ const StyledTask = styled.div`
 const TaskName = styled.div`
     display: flex;
     align-items: center;
-    // width: 50%
-    max-width: 80%;
+    width: 100%;
+    max-width: 90%;
     ${(props) => props.checked && `font-style: italic; color: #ba9973`}
 `
 
@@ -180,11 +181,72 @@ const TrashButton = styled.button`
     }
 `
 
-export default function Task({ children, onDelete, ...props }) {
+const StyledPlusSymbol = styled.span`
+    margin-right: 0.75rem;
+    // margin-top: 0.5rem;
+    font-weight: lighter;
+    cursor: pointer;
+`
+
+export default function Task({
+    task,
+    type,
+    triggerComplete,
+    onDelete,
+    onEdit,
+    addToToday,
+}) {
+    const [editing, setEditing] = useState(false)
+    let renderedTask = null
+
+    function handleCheckboxChange() {
+        if (type === "complete") addToToday(task)
+        else if (type === "today") triggerComplete(task.id)
+    }
+
+    function handleSubmit(taskName) {
+        onEdit({ ...task, name: taskName })
+        setEditing(false)
+    }
+
+    // eslint-disable-next-line default-case
+    switch (type) {
+        case "today":
+        case "complete":
+            renderedTask = (
+                <label className="checkbox-label">
+                    <input
+                        type="checkbox"
+                        checked={task.complete}
+                        onChange={handleCheckboxChange}
+                    />
+                    <span className="checkbox-custom circular"></span>
+                </label>
+            )
+            break
+        case "prev":
+            renderedTask = (
+                <StyledPlusSymbol onClick={() => addToToday(task)}>
+                    +
+                </StyledPlusSymbol>
+            )
+            break
+    }
     return (
-        <StyledTask {...props}>
-            <TaskName checked={props.task.complete}>{children}</TaskName>
-            <TrashButton onDoubleClick={() => onDelete(props.task.id)}>
+        <StyledTask>
+            <TaskName checked={task.complete}>
+                {renderedTask}
+                {editing ? (
+                    <Input
+                        initialVal={task.name}
+                        handleSubmit={handleSubmit}
+                        cancelEdit={() => setEditing(false)}
+                    />
+                ) : (
+                    <span onClick={() => setEditing(true)}>{task.name}</span>
+                )}
+            </TaskName>
+            <TrashButton onDoubleClick={() => onDelete(task.id)}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"

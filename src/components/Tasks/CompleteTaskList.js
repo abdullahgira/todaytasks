@@ -2,15 +2,16 @@ import React from "react"
 import Title from "../elements/Title"
 import Link from "../elements/Link"
 import Nav from "../elements/Nav"
-import CompleteTask from "./CompleteTask"
 
 import moment from "moment"
+import Task from "./Task"
 
 export default function CompleteTaskList({
     tasks,
     onViewChange,
-    addToTodayTasks,
+    addToToday,
     onDelete,
+    onEdit,
 }) {
     const prevCompleteTasks =
         tasks.filter(
@@ -27,11 +28,13 @@ export default function CompleteTaskList({
                 </Link>
             </Nav>
             {prevCompleteTasks.map((task) => (
-                <CompleteTask
+                <Task
                     key={task.id}
                     task={task}
-                    addToTodayTasks={addToTodayTasks}
+                    type="complete"
+                    addToToday={addToToday}
                     onDelete={onDelete}
+                    onEdit={onEdit}
                 />
             ))}
         </React.Fragment>

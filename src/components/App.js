@@ -6,7 +6,6 @@ import CompleteTaskList from "./Tasks/CompleteTaskList"
 import { v4 as uuidv4 } from "uuid"
 
 import moment from "moment"
-import AddTask from "./AddTask"
 
 function App() {
     const [tasks, setTasks] = useState(
@@ -25,7 +24,7 @@ function App() {
         ])
     }
 
-    function addToTodayTasks(prevTask) {
+    function addToToday(prevTask) {
         let taskIdx = tasks.findIndex((t) => t.id === prevTask.id)
         let newTask = {
             ...tasks[taskIdx],
@@ -83,15 +82,16 @@ function App() {
                         triggerComplete={triggerComplete}
                         onDelete={deleteTask}
                         onEdit={editTask}
+                        addNewTask={addNewTask}
                     />
-                    <AddTask addNewTask={addNewTask} />
+                    {/* <AddTask addNewTask={addNewTask} /> */}
                 </>
             )}
             {view === "previous" && (
                 <PreviousTaskList
                     onViewChange={setView}
                     tasks={tasks}
-                    addToTodayTasks={addToTodayTasks}
+                    addToToday={addToToday}
                     onDelete={deleteTask}
                     onEdit={editTask}
                 />
@@ -100,7 +100,7 @@ function App() {
                 <CompleteTaskList
                     onViewChange={setView}
                     tasks={tasks}
-                    addToTodayTasks={addToTodayTasks}
+                    addToToday={addToToday}
                     onDelete={deleteTask}
                     onEdit={editTask}
                 />

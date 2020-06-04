@@ -29,6 +29,7 @@ const ExtraInfo = styled.div`
     color: #ba9973;
     text-align: center;
     margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
 `
 
 const StyledKeyStroke = styled.span`

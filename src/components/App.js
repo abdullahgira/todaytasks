@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import Container from "./elements/Container"
-import TodayTaskList from "./Tasks/TodayTaskList"
-import PreviousTaskList from "./Tasks/PrevTaskList"
-import CompleteTaskList from "./Tasks/CompleteTaskList"
+import TodayTaskList from "./TodayTaskList"
+import PreviousTaskList from "./PrevTaskList"
+import CompleteTaskList from "./CompleteTaskList"
 import { v4 as uuidv4 } from "uuid"
 
 import moment from "moment"

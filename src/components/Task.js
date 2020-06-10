@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import Input from "../elements/Input"
+import Input from "./elements/Input"
 
 const StyledTask = styled.div`
     display: flex;

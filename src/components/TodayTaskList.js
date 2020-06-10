@@ -1,10 +1,10 @@
 import React from "react"
-import Title from "../elements/Title"
-import Link from "../elements/Link"
-import Nav from "../elements/Nav"
+import Title from "./elements/Title"
+import Link from "./elements/Link"
+import Nav from "./elements/Nav"
 
 import moment from "moment"
-import AddTask from "../AddTask"
+import AddTask from "./AddTask"
 import Task from "./Task"
 
 export default function TodayTaskList({

@@ -18,10 +18,6 @@ const SyteldInput = styled.input`
     ::placeholder {
         color: #ba9973;
     }
-
-    &:focus {
-        border: 0 !important;
-    }
 `
 
 const ExtraInfo = styled.div`
@@ -72,8 +68,9 @@ export default function AddTask(props) {
                     setTaskName(e.target.value)
                 }}
                 value={taskName}
+                className="add-task-input"
             />
-            <ExtraInfo>
+            <ExtraInfo className="add-task-info">
                 Press <StyledKeyStroke>ENTER</StyledKeyStroke> to add or{" "}
                 <StyledKeyStroke>ESC</StyledKeyStroke> to cancel
             </ExtraInfo>

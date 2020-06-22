@@ -2,9 +2,9 @@
 
 This app is built to make users focus on their daily tasks without the clutter of tasks that should have been done yesterday or the complete tasks.
 
-The app is divded into 3 sections:
+The app is divded into 3 views:
 
--   Today Tasks (Default): This is where the app launches and this is where you need to focus your energy. It will show only the tasks added today or completed today, after midnight the complete tasks will be transferred to the Complete Tasks section, and the uncomplete tasks will be transferred to Previous Tasks section.
+-   Today Tasks (Default view): This is where the app launches and this is where you need to focus your energy. It will show only the tasks added or completed today, after midnight the complete tasks will be transferred to the Complete Tasks view, and the uncomplete tasks will be transferred to Previous Tasks view.
 -   Previous Tasks: The uncomplete tasks from previous days will be here for you to review or transfer to today's tasks.
 -   Complete Tasks: The completed tasks from previous days will be here for you to get an overview of your accomplishments.
 
@@ -19,11 +19,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 

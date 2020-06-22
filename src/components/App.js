@@ -84,7 +84,6 @@ function App() {
                         onEdit={editTask}
                         addNewTask={addNewTask}
                     />
-                    {/* <AddTask addNewTask={addNewTask} /> */}
                 </>
             )}
             {view === "previous" && (

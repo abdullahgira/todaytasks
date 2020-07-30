@@ -5,8 +5,16 @@ This app is built to make users focus on their daily tasks without the clutter o
 The app is divded into 3 views:
 
 -   Today Tasks (Default view): This is where the app launches and this is where you need to focus your energy. It will show only the tasks added or completed today, after midnight the complete tasks will be transferred to the Complete Tasks view, and the uncomplete tasks will be transferred to Previous Tasks view.
--   Previous Tasks: The uncomplete tasks from previous days will be here for you to review or transfer to today's tasks.
+-   Incomplete Tasks: The uncomplete tasks from previous days will be here for you to review or transfer to today's tasks.
 -   Complete Tasks: The completed tasks from previous days will be here for you to get an overview of your accomplishments.
+
+### Utilized
+
+-   [x] React
+-   [x] Redux
+-   [x] Netlify
+-   [x] Local storage
+-   [ ] Firebase (For synchronizing tasks between multiple devices)
 
 ## Available Scripts
 

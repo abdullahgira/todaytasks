@@ -1,6 +1,10 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import Input from "./elements/Input"
+import * as taskTypes from "../constants/task-types"
+import * as actionTypes from "../constants/action-types"
+import { useDispatch, useSelector } from "react-redux"
+import { v4 } from "uuid"
 
 const StyledTask = styled.div`
     display: flex;
@@ -190,31 +194,51 @@ const StyledPlusSymbol = styled.span`
     cursor: pointer;
 `
 
-export default function Task({
-    task,
-    type,
-    triggerComplete,
-    onDelete,
-    onEdit,
-    addToToday,
-}) {
+export default function Task({ task, type, onDelete, onEdit, addToToday }) {
+    const visibleTasks = useSelector((state) => state.visibleTasks)
+    const dispatch = useDispatch()
+
     const [editing, setEditing] = useState(false)
     let renderedTask = null
 
     function handleCheckboxChange() {
-        if (type === "complete") addToToday(task)
-        else if (type === "today") triggerComplete(task.id)
+        if (visibleTasks === taskTypes.OLD_COMPLETE_TASK) {
+            dispatch({
+                type: actionTypes.ADD_TASK,
+                payload: {
+                    id: v4(),
+                    name: task.name,
+                },
+            })
+            dispatch({
+                type: actionTypes.DELETE_TASK,
+                payload: { id: task.id },
+            })
+        } else if (visibleTasks === taskTypes.TODAY_TASK) {
+            dispatch({
+                type: actionTypes.TOGGLE_COMPLETE,
+                payload: {
+                    id: task.id,
+                },
+            })
+        }
     }
 
     function handleSubmit(taskName) {
-        onEdit({ ...task, name: taskName })
+        dispatch({
+            type: actionTypes.EDIT_TASK,
+            payload: {
+                id: task.id,
+                name: taskName,
+            },
+        })
         setEditing(false)
     }
 
     // eslint-disable-next-line default-case
     switch (type) {
-        case "today":
-        case "complete":
+        case taskTypes.TODAY_TASK:
+        case taskTypes.OLD_COMPLETE_TASK:
             renderedTask = (
                 <Checkbox>
                     <input
@@ -226,9 +250,23 @@ export default function Task({
                 </Checkbox>
             )
             break
-        case "prev":
+        case taskTypes.OLD_INCOMPLETE_TASK:
             renderedTask = (
-                <StyledPlusSymbol onClick={() => addToToday(task)}>
+                <StyledPlusSymbol
+                    onClick={() => {
+                        dispatch({
+                            type: actionTypes.ADD_TASK,
+                            payload: {
+                                id: v4(),
+                                name: task.name,
+                            },
+                        })
+                        dispatch({
+                            type: actionTypes.DELETE_TASK,
+                            payload: { id: task.id },
+                        })
+                    }}
+                >
                     +
                 </StyledPlusSymbol>
             )
@@ -248,7 +286,14 @@ export default function Task({
                     <span onClick={() => setEditing(true)}>{task.name}</span>
                 )}
             </TaskName>
-            <TrashButton onDoubleClick={() => onDelete(task.id)}>
+            <TrashButton
+                onClick={() =>
+                    dispatch({
+                        type: actionTypes.DELETE_TASK,
+                        payload: { id: task.id },
+                    })
+                }
+            >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"

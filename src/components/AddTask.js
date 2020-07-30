@@ -1,5 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { useDispatch } from "react-redux"
+import { addTask } from "../actions"
+import { v4 } from "uuid"
 
 const SyteldInput = styled.input`
     display: block;
@@ -41,12 +44,18 @@ const ESC_KEY = 27
 
 export default function AddTask(props) {
     const [taskName, setTaskName] = useState("")
+    const dispatch = useDispatch()
 
     function handleKeyPress(e) {
         e.preventDefault()
         if (e.keyCode === ENTER_KEY) {
             if (taskName.trim() !== "") {
-                props.addNewTask(taskName)
+                dispatch(
+                    addTask({
+                        id: v4(),
+                        name: taskName,
+                    })
+                )
                 setTaskName("")
             }
         } else if (e.keyCode === ESC_KEY) {
